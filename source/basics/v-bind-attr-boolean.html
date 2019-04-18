@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+  </script>
+</head>
+
+<body>
+  <div id="hello-world">
+    <button v-bind:disabled="disabled" style="text-align:center;">disabled</button>
+    <button v-bind:disabled="!disabled" style="text-align:center;">!disabled</button>
+  </div>
+
+</body>
+
+<script>
+  var app = new Vue({
+    el: '#hello-world',
+    data: {
+      disabled: true,
+    }
+  });
+
+
+</script>
+
+</html>

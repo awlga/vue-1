@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+  </script>
+</head>
+
+<body>
+  <div id="hello-world">
+    {{ message }}
+    <p v-html="html" style="text-align:center;"></p>
+  </div>
+
+</body>
+
+<script>
+  var app = new Vue({
+    el: '#hello-world',
+    data: {
+      message: 'Pure Text!',
+      html: '<img src="http://www.baidu.com"/>'
+    }
+  });
+
+
+</script>
+
+</html>

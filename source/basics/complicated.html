@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+  </script>
+</head>
+
+<body>
+  <div id="hello-world">
+    {{ message }}
+
+    <div class="inner">
+      {{ message }}
+    </div>
+    <div class="inner">
+        {{ message }}
+      </div>
+    <div class="outer">
+      {{ message }}
+    </div>
+
+  </div>
+
+</body>
+
+<script>
+  var app = new Vue({
+    el: '#hello-world .inner',
+    data: {
+      message: 'Hello World!',
+    }
+  });
+
+
+</script>
+
+</html>
