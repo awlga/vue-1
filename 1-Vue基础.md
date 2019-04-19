@@ -242,9 +242,9 @@ HTML替换应用于用户数据可能会产生不可预测的结果。
 2. CSS处理指令 `v-show`、`v-cloak`
 3. 条件指令 `v-if`、`v-else`、`v-else-if`
 4. 循环指令 `v-for`
-5. 绑定指令 `v-bind`
-6. 事件指令 `v-on`
-7. 数据模型指令 `v-model`、`v-once`
+5. 事件指令 `v-on`
+6. 数据模型指令 `v-model`、`v-once`
+7. 绑定指令 `v-bind`
 9. 组件指令 `v-slot`
 
 ---
@@ -418,8 +418,126 @@ var for = new Vue({
 「 [示例：v-for.html](./source/basics/v-for.html)」
 
 ---
-<p style="color:#3A9;text-align:center;">绑定指令</p>
+<p style="color:#3A9;text-align:center;">事件指令</p>
 ===
+# 格式: 
+`v-on:event.modifier="handler"`
+`@event.modifier="handler"`
+
+1. 基本形式
+```HTML
+<!-- 方法处理器 -->
+<button v-on:click="doThis"></button>
+
+<!-- 动态事件 (2.6.0+) -->
+<button v-on:[event]="doThis"></button>
+
+<!-- 内联语句 -->
+<button v-on:click="doThat('hello', $event)"></button>
+
+```
+---
+<p style="color:#3A9;text-align:center;">事件指令二（示例)</p>
+===
+
+2. 缩写
+
+```
+<!-- 缩写 -->
+<button @click="doThis"></button>
+
+<!-- 动态事件缩写 (2.6.0+) -->
+<button @[event]="doThis"></button>
+
+```
+---
+<p style="color:#3A9;text-align:center;">事件指令三（示例)</p>
+===
+
+3. 修改符
+
+```
+.stop - 调用 event.stopPropagation()。
+.prevent - 调用 event.preventDefault()。
+.capture - 添加事件侦听器时使用 capture 模式。
+.self - 只当事件是从侦听器绑定的元素本身触发时才触发回调。
+.{keyCode | keyAlias} - 只当事件是从特定键触发时才触发回调。
+.native - 监听组件根元素的原生事件。
+.once - 只触发一次回调。
+.left - (2.2.0) 只当点击鼠标左键时触发。
+.right - (2.2.0) 只当点击鼠标右键时触发。
+.middle - (2.2.0) 只当点击鼠标中键时触发。
+.passive - (2.3.0) 以 { passive: true } 模式添加侦听器
+````
+
+---
+<p style="color:#3A9;text-align:center;">事件指令三（示例)</p>
+===
+
+3. 修改符
+
+### 消息传递阻止
+
+```
+<!-- 停止冒泡 -->
+<button @click.stop="doThis"></button>
+
+<!-- 阻止默认行为 -->
+<button @click.prevent="doThis"></button>
+
+<!-- 阻止默认行为，没有表达式 -->
+<form @submit.prevent></form>
+
+<!--  串联修饰符 -->
+<button @click.stop.prevent="doThis"></button>
+```
+
+---
+<p style="color:#3A9;text-align:center;">事件指令四（示例)</p>
+===
+
+3. 修改符
+
+### 键盘事件
+
+```
+<!-- 键修饰符，键别名 -->
+<input @keyup.enter="onEnter">
+
+<!-- 键修饰符，键代码 -->
+<input @keyup.13="onEnter">
+```
+
+---
+<p style="color:#3A9;text-align:center;">事件指令五（示例)</p>
+===
+
+3. 修改符
+
+### 次数限制
+
+```
+<!-- 点击回调只会触发一次 -->
+<button v-on:click.once="doThis"></button>
+```
+---
+<p style="color:#3A9;text-align:center;">事件指令六（示例)</p>
+===
+
+3. 修改符
+
+### 事件对象化
+```
+<!-- 对象语法 (2.4.0+) -->
+<button v-on="{ mousedown: doThis, mouseup: doThat }">
+</button>
+```
+
+
+
+「 [示例：v-on.html](./source/basics/v-on.html)」
+
+---
 
 
 

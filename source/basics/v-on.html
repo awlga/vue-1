@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+  </script>
+</head>
+
+<body>
+
+  <div class="on1">
+    <h1>on1（表达式）</h1>
+    <button v-on:click="counter += 1">点击加1
+    </button>
+    <p>{{ counter }}</p>
+  </div>
+
+  <div class="on2">
+    <h1>on2(处理函数）</h1>
+    <button v-on:click="onClick">点击加1
+    </button>
+    <p>{{ counter }}</p>
+  </div>
+
+  <div class="on3">
+    <h1>on3(事件处理）</h1>
+    <button v-on:click="onClick">btn1
+    </button>
+    <button v-on:click="onClick">btn2
+    </button>
+    <p>{{ name }}</p>
+  </div>
+
+  <div class="on4">
+    <h1>on4(事件处理）</h1>
+    <button v-on:click="select('btn1');">btn1
+    </button>
+    <button v-on:click="select('btn2');">btn2
+    </button>
+    <p>{{ name }} selected!</p>
+  </div>
+</body>
+
+<script>
+  var on1 = new Vue({
+    el: '.on1',
+    data: {
+      counter: 0
+    }
+  });
+
+  var on2 = new Vue({
+    el: '.on2',
+    data: {
+      counter: 0
+    },
+    methods: {
+      onClick: function () {
+        this.counter++;
+      }
+    }
+  });
+
+  var on3 = new Vue({
+    el: '.on3',
+    data: {
+      name: "no click!"
+    },
+    methods: {
+      onClick: function (event) {
+        this.name = event.target.innerText;
+      }
+    }
+  });
+
+  var on4 = new Vue({
+    el: '.on4',
+    data: {
+      name: "no item"
+    },
+    methods: {
+      select: function (item) {
+        this.name = item;
+      }
+    }
+  });
+
+
+</script>
+
+</html>
