@@ -102,13 +102,13 @@ data的变化会导致DOM内容也发生变化
 <p style="color:#3A9;text-align:center;">模板详解</p>
 ===
 ---
-模板详情
+<p style="color:#3A9;text-align:center;">模板详情</p>
 ===
 Vue模板的功能主要有几个：
-1. 数据替换
+1. 数据处理
 2. DOM事件处理
 ---
-<p style="color:#3A9;text-align:center;">数据替换</p>
+<p style="color:#3A9;text-align:center;">数据处理</p>
 ===
 # 纯文本替换
 # HTML节点内容替换
@@ -116,7 +116,7 @@ Vue模板的功能主要有几个：
 # 表达式替换
 
 ---
-纯文本替换
+<p style="color:#3A9;text-align:center;">纯文本替换</p>
 ===
 
 1. 格式：`{{ text }}`
@@ -133,7 +133,7 @@ Vue模板的功能主要有几个：
 「 [纯ASCII文本](./source/basics/pure-text.html)」「 [带HTML标签文本](./source/basics/pure-text.html.html)」
 
 ---
-HTML替换
+<p style="color:#3A9;text-align:center;">HTML替换</p>
 ===
 1. 格式: `v-html="html"`
 2. 作用：将`v-html`指令所对应的标签内容上填充data.html所对应的内容。
@@ -143,7 +143,7 @@ HTML替换
 「 [HTML替换危险内容](./source/basics/v-html-text.html)」
 
 ---
-示例:
+<p style="color:#3A9;text-align:center;">示例</p>
 ===
 
 对于父节点: 
@@ -162,7 +162,7 @@ HTML替换
 ```
 
 ---
-HTML替换的危险性
+<p style="color:#3A9;text-align:center;">HTML替换的危险性</p>
 ===
 HTML替换应用于用户数据可能会产生不可预测的结果。
 比如XSS攻击，从而导致网站以及网站用户被攻击。
@@ -171,7 +171,7 @@ HTML替换应用于用户数据可能会产生不可预测的结果。
 2. HTML替换禁止替换用户数据
 
 ---
-HTML属性替换
+<p style="color:#3A9;text-align:center;">HTML属性替换</p>
 ===
 应用`v-bind`指令修改属性内容。
 1. 格式: `v-bind:attr="value"`
@@ -187,7 +187,7 @@ HTML属性替换
 「 [v-bind-attr-boolean](./source/basics/v-bind-attr-boolean.html)」
 
 ---
-表达式替换
+<p style="color:#3A9;text-align:center;">表达式替换</p>
 ===
 表达式替换与文本替换类似，只是将变量换成是表达式。
 1. 格式1：`{{ exp }}`
@@ -199,7 +199,7 @@ HTML属性替换
 > 表达式访问的全局功能是受限的,不能访问用户定义的全局变量
 
 ---
-示例
+<p style="color:#3A9;text-align:center;">示例</p>
 ===
 正确：
 ```
@@ -222,6 +222,66 @@ HTML属性替换
 {{ if (ok) { return message } }}
 
 ```
+
+---
+<p style="color:#3A9;text-align:center;">指令(Directives)</p>
+===
+---
+<p style="color:#3A9;text-align:center;">指令</p>
+===
+指令是指格式为 `v-`的属性。指令主要有几个要点需要了解：
+1. 指令分类
+2. 指令参数与动态指令参数
+3. 修饰符
+4. 简写或者缩写
+
+---
+<p style="color:#3A9;text-align:center;">指令分类</p>
+===
+1. 字符/HTML处理指令 `v-text`, `v-html`, `v-pre`
+2. CSS处理指令 `v-show`、`v-cloak`
+3. 条件指令 `v-if`、`v-else`、`v-else-if`
+4. 循环指令 `v-for`
+5. 数据模型指令 `v-model`、`v-once`
+6. 绑定指令 `v-bind`
+7. 事件指令 `v-on`
+8. 组件指令 `v-slot`
+
+---
+
+<p style="color:#3A9;text-align:center;">字符/HTML处理</p>
+===
+
+1. `v-text`: 将变量更换为元素的文本
+```
+<span v-text="msg"></span>
+<!-- 和下面的一样 -->
+<span>{{msg}}</span>
+```
+
+2. `v-html`: 将变量更换为元素的HTML
+```
+<div v-html="html"></div>
+```
+3. `v-pre`: 不对当前元素与子元素进行Vue的相关处理
+
+```
+<span v-pre>{{ this will not be compiled }}</span>
+```
+「 [示例：v-xxx.html](./source/basics/v-xxx.html)」
+
+---
+<p style="color:#3A9;text-align:center;">CSS处理指令</p>
+===
+
+
+
+
+
+
+
+
+
 
 
 

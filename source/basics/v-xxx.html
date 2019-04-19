@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+  </script>
+</head>
+
+<body>
+  <div id="hello-world">
+    {{ message }}
+    <p v-text="message">
+    </p>
+    <p v-html="message">
+    </p>
+    <p v-pre>
+      inside pre: {{message}}
+    </p>
+  </div>
+
+</body>
+
+<script>
+  var app = new Vue({
+    el: '#hello-world',
+    data: {
+      new: 'new',
+      message: '<h1>Hello world! {{ new }}</h1>',
+    }
+  });
+
+
+</script>
+
+</html>
