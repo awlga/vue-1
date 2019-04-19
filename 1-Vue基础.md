@@ -242,10 +242,10 @@ HTML替换应用于用户数据可能会产生不可预测的结果。
 2. CSS处理指令 `v-show`、`v-cloak`
 3. 条件指令 `v-if`、`v-else`、`v-else-if`
 4. 循环指令 `v-for`
-5. 数据模型指令 `v-model`、`v-once`
-6. 绑定指令 `v-bind`
-7. 事件指令 `v-on`
-8. 组件指令 `v-slot`
+5. 绑定指令 `v-bind`
+6. 事件指令 `v-on`
+7. 数据模型指令 `v-model`、`v-once`
+9. 组件指令 `v-slot`
 
 ---
 
@@ -278,12 +278,12 @@ HTML替换应用于用户数据可能会产生不可预测的结果。
 <h1 v-show="show">Hello!</h1>
 ```
 3. `v-cloak`: 隐藏未编译的数据，通常需要结合CSS完成
-```
+```css
 [v-cloak] {
   display: none;
 }
 ```
-```
+```html
 <div v-cloak>
   {{ message }}
 </div>
@@ -339,49 +339,88 @@ HTML替换应用于用户数据可能会产生不可预测的结果。
 `v-for`: 对数组，对象，数值等可迭代的内容
 
 ---
-数组循环
+<p style="color:#3A9;text-align:center;">数组循环</p>
 ===
 1. 格式
 最基本的格式：
-```
+```html
 <div v-for="item in items">
   {{ item.text }}
 </div>
 ```
-可以获得key, index的形式
-```
+可以获得key, index的形式, 基中`in`可以由`of`替换
+```html
 <div v-for="(item, index) in items"></div>
 <div v-for="(val, key) in object"></div>
 <div v-for="(val, key, index) in object"></div>
 ```
 ---
-示例
+<p style="color:#3A9;text-align:center;">示例(数组)</p>
 ===
-
 1. HTML
-```
-<ul class="for1">
+```html
+<ul class="for">
   <li v-for="item in items">
     {{ item.text }}
   </li>
 </ul>
 ```
 2. 脚本
-```
-var for1 = new Vue({
-  el: '.for1',
+```js
+var for = new Vue({
+  el: '.for',
   data: {
-    items: [
-      { text: 'Item1' },
-      { text: 'Item2' }
-    ]
+    items: [ { text: 'Item1' }, { text: 'Item2' }]
   }
 })
 ```
 
-「 [示例：v-for1.html](./source/basics/v-for1.html)」
+---
+<p style="color:#3A9;text-align:center;">示例(对象)</p>
+===
+1. HTML
+```html
+<ul class="for">
+  <li v-for="value in items">
+    {{ value }}
+  </li>
+</ul>
+```
+2. 脚本
+```js
+var for1 = new Vue({
+  el: '.for',
+  data: {
+    items: { name: 'John', age: 20,  height: 180}
+  }
+})
+```
 
 ---
+<p style="color:#3A9;text-align:center;">示例(数值)</p>
+===
+1. HTML
+```html
+<ul class="for">
+  <li v-for="value in 10">
+    {{ value }}
+  </li>
+</ul>
+```
+2. 脚本
+```js
+var for = new Vue({
+  el: '.for'
+});
+```
+---
+
+「 [示例：v-for.html](./source/basics/v-for.html)」
+
+---
+<p style="color:#3A9;text-align:center;">绑定指令</p>
+===
+
 
 
 

@@ -4,11 +4,6 @@
 <head>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
   </script>
-  <style>
-    [v-cloak] {
-      display: none;
-    }
-  </style>
 </head>
 
 <body>
@@ -40,9 +35,26 @@
     <li>for4</li>
 
     <li v-for="(value, key, index) in items">
-        {{index}} - {{key}} - {{ value }}
-      </li>
+      {{index}} - {{key}} - {{ value }}
+    </li>
   </ul>
+
+
+  <ul class="for5">
+    <li>for5</li>
+
+    <li v-for="v in 10">
+      {{ v }}
+    </li>
+  </ul>
+
+  <table class="for6">
+    <tr v-for="item in items">
+      <td>{{item.name}}</td>
+      <td>{{item.age}}</td>
+      <td>{{item.height}}</td>
+    </tr>
+  </table>
 
 </body>
 
@@ -82,7 +94,23 @@
       items: { text: 'Item1', name: "Hello", age: 1 },
     }
   });
-  let i = 0;
+
+  var for5 = new Vue({
+    el: '.for5',
+    data: {
+      items: { text: 'Item1', name: "Hello", age: 1 },
+    }
+  });
+
+  var for6 = new Vue({
+    el: '.for6',
+    data: {
+      items: [{ height: 180, name: "Alice", age: 24 }, 
+      { height: 181, name: "Bob", age: 24.5 }, 
+      { height: 182, name: "John", age: 25 },]
+    }
+  });
+
 </script>
 
 </html>
