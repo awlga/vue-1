@@ -273,6 +273,118 @@ HTML替换应用于用户数据可能会产生不可预测的结果。
 ---
 <p style="color:#3A9;text-align:center;">CSS处理指令</p>
 ===
+1. `v-show`: 切换元素的display属性
+```
+<h1 v-show="show">Hello!</h1>
+```
+3. `v-cloak`: 隐藏未编译的数据，通常需要结合CSS完成
+```
+[v-cloak] {
+  display: none;
+}
+```
+```
+<div v-cloak>
+  {{ message }}
+</div>
+```
+
+「 [示例：v-css.html](./source/basics/v-css.html)」
+
+---
+<p style="color:#3A9;text-align:center;">条件指令</p>
+===
+
+1. `v-if`:  当变量为真是渲染/编译元素
+```
+<h1 v-if="awesome">Vue is awesome!</h1>
+```
+2. `v-else`: 当`v-if`的条件不成立时生效
+```
+<h1 v-else>Oh no 😢</h1>
+```
+4. `v-else-if`: 当前一个条件失效时，再根据`v-if`的方式进行渲染
+```
+<div v-else-if="type === 'B'">B</div>
+<div v-else-if="type === 'C'">C</div>
+```
+
+> `v-else`, `v-else-if` 必须放在`v-if`或者`v-else-if`后面
+
+---
+示例
+
+```
+<div v-if="type === 'Human'">
+  I'am a Human;
+</div>
+<div v-else-if="type === 'Robot'">
+  I'am a Robot
+</div>
+<div v-else-if="type === 'Machine'">
+  I'am a Machine
+</div>
+<div v-else>
+  I'am an Alien.
+</div>
+```
+
+「 [示例：v-if.html](./source/basics/v-if.html)」
+
+
+---
+
+<p style="color:#3A9;text-align:center;">循环指令</p>
+===
+`v-for`: 对数组，对象，数值等可迭代的内容
+
+---
+数组循环
+===
+1. 格式
+最基本的格式：
+```
+<div v-for="item in items">
+  {{ item.text }}
+</div>
+```
+可以获得key, index的形式
+```
+<div v-for="(item, index) in items"></div>
+<div v-for="(val, key) in object"></div>
+<div v-for="(val, key, index) in object"></div>
+```
+---
+示例
+===
+
+1. HTML
+```
+<ul class="for1">
+  <li v-for="item in items">
+    {{ item.text }}
+  </li>
+</ul>
+```
+2. 脚本
+```
+var for1 = new Vue({
+  el: '.for1',
+  data: {
+    items: [
+      { text: 'Item1' },
+      { text: 'Item2' }
+    ]
+  }
+})
+```
+
+「 [示例：v-for1.html](./source/basics/v-for1.html)」
+
+---
+
+
+
 
 
 

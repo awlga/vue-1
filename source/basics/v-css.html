@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+  </script>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="css">
+    <h1 v-show="show">Hello!</h1>
+    <p v-cloak>
+      with cloak {{ message }}
+    </p>
+    <p>
+      without cloak {{ message }}
+    </p>
+  </div>
+
+</body>
+
+<script>
+  var app = new Vue({
+    el: '.css',
+    data: {
+      show: true,
+      message: '@css'
+    }
+  });
+</script>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+  </script>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="if">
+      <div v-if="type === 'Human'">
+          I'am a Human;
+        </div>
+        <div v-else-if="type === 'Robot'">
+          I'am a Robot
+        </div>
+        <div v-else-if="type === 'Machine'">
+          I'am a Machine
+        </div>
+        <div v-else>
+          I'am an Alien.
+        </div>
+  </div>
+
+</body>
+
+<script>
+  var app = new Vue({
+    el: '.if',
+    data: {
+      type: 'Human'
+    }
+  });
+  let i = 0;
+  setInterval(() => {
+    app.type = ['Human', 'Robot', 'Machine', 'Other' ][i++ % 4];
+  }, 500);
+</script>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+  </script>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <ul class="for1">
+    <li>for1</li>
+    <li v-for="item in items">
+      {{ item.text }}
+    </li>
+  </ul>
+
+  <ul class="for2">
+    <li>for2</li>
+
+    <li v-for="(item, index) in items">
+      {{index}} - {{ item.text }}
+    </li>
+  </ul>
+
+  <ul class="for3">
+    <li>for3</li>
+
+    <li v-for="(value, key) in items">
+      {{key}} - {{ value }}
+    </li>
+  </ul>
+
+  <ul class="for4">
+    <li>for4</li>
+
+    <li v-for="(value, key, index) in items">
+        {{index}} - {{key}} - {{ value }}
+      </li>
+  </ul>
+
+</body>
+
+<script>
+  var for1 = new Vue({
+    el: '.for1',
+    data: {
+      items: [
+        { text: 'Item1' },
+        { text: 'Item2' }
+      ]
+    }
+  });
+
+  var for2 = new Vue({
+    el: '.for2',
+    data: {
+      items: [
+        { text: 'Item1' },
+        { text: 'Item2' }
+      ]
+    }
+  });
+
+  var for3 = new Vue({
+    el: '.for3',
+    data: {
+      items:
+        { text: 'Item1', name: "Hello", age: 1 },
+    }
+  });
+
+
+  var for4 = new Vue({
+    el: '.for4',
+    data: {
+      items: { text: 'Item1', name: "Hello", age: 1 },
+    }
+  });
+  let i = 0;
+</script>
+
+</html>
