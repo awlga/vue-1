@@ -1072,6 +1072,25 @@ computed 版本实现
 7. beforeDestroy
 8. destroy
 
+---
+<p style="color:#3A9;text-align:center;">生命周期钩子</p>
+===
+
+```
+new Vue({
+  data: {
+    a: 1
+  },
+  created: function () {
+    // `this` 指向 vm 实例
+    console.log('a is: ' + this.a)
+  }
+});
+// => "a is: 1"
+```
+
+
+
 
 
 
