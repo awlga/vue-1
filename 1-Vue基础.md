@@ -438,7 +438,7 @@ var for = new Vue({
 「 [示例：v-on.html](./source/basics/v-on.html)」
 
 ---
-<p style="color:#3A9;text-align:center;">事件指令二（示例)</p>
+<p style="color:#3A9;text-align:center;">事件指令（示例)</p>
 ===
 
 2. 缩写
@@ -450,9 +450,16 @@ var for = new Vue({
 <!-- 动态事件缩写 (2.6.0+) -->
 <button @[event]="doThis"></button>
 
+<!-- 对象语法 (2.4.0+) -->
+<button v-on="{ mousedown: doThis, mouseup: doThat }">
+</button>
+
 ```
+
+「 [示例：v-on.html](./source/basics/v-on.html)」
+
 ---
-<p style="color:#3A9;text-align:center;">事件指令三（示例)</p>
+<p style="color:#3A9;text-align:center;">事件指令（示例)</p>
 ===
 
 3. 修改符（Modifier)
@@ -475,9 +482,7 @@ var for = new Vue({
 <p style="color:#3A9;text-align:center;">事件指令三（示例)</p>
 ===
 
-3. 修改符（Modifier)
-
-### 消息传递阻止修改符
+### DOM事件消息修改符
 
 ```
 <!-- 停止冒泡 -->
@@ -491,15 +496,65 @@ var for = new Vue({
 
 <!--  串联修饰符 -->
 <button @click.stop.prevent="doThis"></button>
+
 ```
 
+「 [.stop](./source/basics/v-on.modifier.stop.html)」「 [.prevent](./source/basics/v-on.modifier.prevent.html)」
+
+
 ---
-<p style="color:#3A9;text-align:center;">事件指令四（示例)</p>
+
+<p style="color:#3A9;text-align:center;">事件指令（示例)</p>
 ===
 
-3. 修改符（Modifier)
+### DOM事件消息修改符(续）
 
-### 键盘事件
+```
+<!-- 添加事件监听器时使用事件捕获模式 -->
+<!-- 即元素自身触发的事件先在此处理，然后才交由内部元素进行处理 -->
+<div v-on:click.capture="doThis">...</div>
+
+<!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+<!-- 即事件不是从内部元素触发的 -->
+<div v-on:click.self="doThat">...</div>
+
+<!-- 点击事件将只会触发一次 -->
+<a v-on:click.once="doThis"></a>
+```
+
+「 [.capture](./source/basics/v-on.modifier.capture.html)」「 [.self .once](./source/basics/v-on.modifier.self.html)」
+
+
+---
+
+
+<p style="color:#3A9;text-align:center;">事件指令（示例)</p>
+===
+
+### DOM事件消息修改符(续）
+
+```
+<!-- 滚动事件的默认行为 (即滚动行为) 将会立即触发 -->
+<!-- 而不会等待 `onScroll` 完成  -->
+<!-- 这其中包含 `event.preventDefault()` 的情况 -->
+<div v-on:scroll.passive="onScroll">...</div>
+```
+
+作用：提升页面滑动的流畅度
+
+目前测试结果来看，提升不算非常理想。
+
+[youtube 视频](https://www.youtube.com/watch?v=65VMej8n23A)
+
+「 [.passive](./source/basics/v-on.modifier.passive.html)」
+
+
+---
+
+<p style="color:#3A9;text-align:center;">事件指令（示例)</p>
+===
+
+### 键盘事件修改符
 
 ```
 <!-- 键修饰符，键别名 -->
@@ -509,36 +564,108 @@ var for = new Vue({
 <input @keyup.13="onEnter">
 ```
 
+「 [v-on.key.html](./source/basics/v-on.key.html)」
+
+
 ---
-<p style="color:#3A9;text-align:center;">事件指令五（示例)</p>
+<p style="color:#3A9;text-align:center;">事件指令</p>
 ===
 
-3. 修改符
+### 键盘事件修改符(续）
 
-### 次数限制
+### 自定义按键修改符
+```
+Vue.config.keyCodes = {
+  v: 86,
+  f1: 112,
+  // camelCase won`t work
+  mediaPlayPause: 179,
+  // instead you can use kebab-case with double quotation marks
+  "media-play-pause": 179,
+  up: [38, 87]
+}
 
 ```
-<!-- 点击回调只会触发一次 -->
-<button v-on:click.once="doThis"></button>
-```
+
+
+
+「 [v-on.key.html](./source/basics/v-on.key.html)」
+
 ---
-<p style="color:#3A9;text-align:center;">事件指令六（示例)</p>
+
+<p style="color:#3A9;text-align:center;">事件指令</p>
+===
+### 键盘事件修改符(续）
+
+### 已经定义的按键修改符
+
+```
+    .enter
+    .tab
+    .delete (捕获“删除”和“退格”键)
+    .esc
+    .space
+    .up
+    .down
+    .left
+    .right
+```
+
+---
+
+
+<p style="color:#3A9;text-align:center;">事件指令</p>
+===
+### 键盘控制事件修改符
+
+### 已经定义的按键修改符
+
+```
+    .enter
+    .tab
+    .delete (捕获“删除”和“退格”键)
+    .esc
+    .space
+    .up
+    .down
+    .left
+    .right
+```
+
+---
+
+<p style="color:#3A9;text-align:center;">事件指令</p>
+===
+### .exact 修改符
+
+`.exact` 修饰符允许你控制由精确的系统修饰符组合触发的事件。
+
+```
+<!-- 即使 Alt 或 Shift 被一同按下时也会触发 -->
+<button @click.ctrl="onClick">A</button>
+
+<!-- 有且只有 Ctrl 被按下的时候才触发 -->
+<button @click.ctrl.exact="onCtrlClick">A</button>
+
+<!-- 没有任何系统修饰符被按下的时候才触发 -->
+<button @click.exact="onClick">A</button>
+```
+
+---
+
+
+<p style="color:#3A9;text-align:center;">事件指令</p>
 ===
 
-3. 修改符（Modifier)
+### 鼠标事件修改符
 
-### 事件对象化
 ```
-<!-- 对象语法 (2.4.0+) -->
-<button v-on="{ mousedown: doThis, mouseup: doThat }">
-</button>
+.left
+.right
+.middle
 ```
 
-
-
-「 [示例：v-on.html](./source/basics/v-on.html)」
-
----
+适合游戏等控制场景
 
 
 

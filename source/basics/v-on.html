@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+  <script src="../vue.js">
   </script>
 </head>
 
@@ -46,9 +46,33 @@
     </button>
     <button v-on:click="changeEvent('click');">event click
     </button>
-    <button v-on:click="changeEvent('mouseout');">event mouse over
-      </button>
-    <p>{{ name }} selected!</p>
+    <button v-on:click="changeEvent('mouseout');">event mouseout
+    </button>
+  </div>
+
+  <div class="on6">
+    <h1>on6（普通事件缩写）</h1>
+    <button @click="counter += 1">点击加1
+    </button>
+    <p>{{ counter }}</p>
+  </div>
+
+  <div class="on7">
+    <h1>on7(动态事件缩写）</h1>
+    <button @[event]="onEvent">btn1
+    </button>
+    <button @click="changeEvent('click');">event click
+    </button>
+    <button @click="changeEvent('mouseout');">event mouseout
+    </button>
+  </div>
+
+  <div class="on8">
+    <h1>on（对象化事件）</h1>
+    <button v-on="{ mouseover: mouseover, mouseout: mouseout }">
+      请将鼠标来回移进移出观察变化。
+    </button>
+    <p>{{ message }}</p>
   </div>
 </body>
 
@@ -108,6 +132,45 @@
       },
       changeEvent: function (event) {
         this.event = event;
+      }
+    }
+  });
+
+  var on6 = new Vue({
+    el: '.on6',
+    data: {
+      counter: 0
+    }
+  });
+
+
+  var on7 = new Vue({
+    el: '.on7',
+    data: {
+      event: "click"
+    },
+    methods: {
+      onEvent: function (event) {
+        alert("event occur");
+        console.log("event invoked");
+      },
+      changeEvent: function (event) {
+        this.event = event;
+      }
+    }
+  });
+
+  var on8 = new Vue({
+    el: '.on8',
+    data: {
+      message: "对象事件还没有开始"
+    },
+    methods: {
+      mouseout: function (event) {
+        this.message = "对象事件mouseout触发!";
+      },
+      mouseover: function (event) {
+        this.message = "对象事件mouseover触发!";
       }
     }
   });

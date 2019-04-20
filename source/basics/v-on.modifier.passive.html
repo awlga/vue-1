@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+  <style>
+    div {
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+
+    div.on-1 {
+      background-color: aliceblue;
+    }
+
+    div.on-2 {
+      background-color: blueviolet;
+    }
+
+    div.on-3 {
+      background-color: coral;
+    }
+
+    div.on-4 {
+      background-color: #FF0;
+      overflow-y: auto;
+      height: 50px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="on1 on-1">
+    <h1>on1（默认行为阻止）</h1>
+    <div class="on-2" v-on:click.stop="counter += 1">点击加1
+      <div class="on-3" v-on:click="counter += 1">没有被通知的。
+        <div class="on-4" v-html="content" v-on:click.stop="counter += 1" v-on:scroll="onscroll">点击加1
+        </div>
+      </div>
+    </div>
+
+    <div class="on-2" v-on:click="counter += 1">点击加1
+      <div class="on-3" v-on:click="counter += 1">通知的。
+        <div class="on-4" v-html="content" v-on:click="counter += 1" v-on:scroll.passive="onendscroll">点击加1
+        </div>
+      </div>
+    </div>
+    <p>{{ content }}</p>
+  </div>
+</body>
+
+<script>
+  var on1 = new Vue({
+    el: '.on1',
+    data: {
+      counter: 0,
+      content: "测试passive"
+    },
+    created: function () {
+      // `this` 指向 vm 实例
+      console.log("inside create");
+      let lines = [];
+      for (let i = 0; i < 1000; i++) {
+        lines.push("<p> new line " + i + "</p>");
+      }
+      this.content += lines.join("");
+    },
+
+    methods: {
+      onscroll: () => {
+        console.log("onscroll");
+        let lines = [];
+
+        for (let i = 0; i < 1000000; i++) {
+          lines.push("<p> new line " + i + "</p>");
+        }
+        this.content += lines.join("");
+      },
+      onendscroll: () => {
+        console.log("onendscroll");
+        let lines = [];
+        for (let i = 0; i < 1000000; i++) {
+          lines.push("<p> new line " + i + "</p>");
+        }
+        this.content += lines.join("");
+      }
+    }
+  });
+
+
+
+</script>
+
+</html>
