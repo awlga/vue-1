@@ -420,9 +420,8 @@ var for = new Vue({
 ---
 <p style="color:#3A9;text-align:center;">事件指令</p>
 ===
-# 格式: 
-`v-on:event.modifier="handler"`
-`@event.modifier="handler"`
+### 格式: 
+`v-on:event.modifier="handler"` / `@event.modifier="handler"`
 
 1. 基本形式
 ```HTML
@@ -436,6 +435,8 @@ var for = new Vue({
 <button v-on:click="doThat('hello', $event)"></button>
 
 ```
+「 [示例：v-on.html](./source/basics/v-on.html)」
+
 ---
 <p style="color:#3A9;text-align:center;">事件指令二（示例)</p>
 ===
@@ -454,7 +455,7 @@ var for = new Vue({
 <p style="color:#3A9;text-align:center;">事件指令三（示例)</p>
 ===
 
-3. 修改符
+3. 修改符（Modifier)
 
 ```
 .stop - 调用 event.stopPropagation()。
@@ -474,9 +475,9 @@ var for = new Vue({
 <p style="color:#3A9;text-align:center;">事件指令三（示例)</p>
 ===
 
-3. 修改符
+3. 修改符（Modifier)
 
-### 消息传递阻止
+### 消息传递阻止修改符
 
 ```
 <!-- 停止冒泡 -->
@@ -496,7 +497,7 @@ var for = new Vue({
 <p style="color:#3A9;text-align:center;">事件指令四（示例)</p>
 ===
 
-3. 修改符
+3. 修改符（Modifier)
 
 ### 键盘事件
 
@@ -524,7 +525,7 @@ var for = new Vue({
 <p style="color:#3A9;text-align:center;">事件指令六（示例)</p>
 ===
 
-3. 修改符
+3. 修改符（Modifier)
 
 ### 事件对象化
 ```
