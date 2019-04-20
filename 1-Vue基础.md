@@ -1054,6 +1054,24 @@ computed 版本实现
 > 但是对于复杂的数据，比如异步数据的更新的监控，watch会更加好用
 
 ---
+<p style="color:#3A9;text-align:center;">生命周期</p>
+===
+<div style="height: 640px; overflow-y: auto;">
+  <img src="./images/lifecycle.png"/>
+</div>
+
+---
+<p style="color:#3A9;text-align:center;">生命周期钩子</p>
+===
+1. beforeCreate
+2. created
+3. beforeMounte
+4. mounted
+5. beforeUpdate
+6. updated
+7. beforeDestroy
+8. destroy
+
 
 
 
