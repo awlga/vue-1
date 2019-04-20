@@ -99,16 +99,27 @@ data的变化会导致DOM内容也发生变化
 > 当你在控制台修改对应的值时，dom就会发生相应的变化
 ---
 
+
+<p style="color:#3A9;text-align:center;">进入模板之前</p>
+===
+
+> 前面介绍了基本的Vue使用方法
+> Vue核心处理的内容主要包括：模板，事件，数据，组件
+> 所以下面我们将一次展开讨论。
+
+---
+
+
 <p style="color:#3A9;text-align:center;">模板详解</p>
 ===
 ---
 <p style="color:#3A9;text-align:center;">模板详情</p>
 ===
 Vue模板的功能主要有几个：
-1. 数据处理
-2. DOM事件处理
+1. 数据处理（简单的数据处理，输入处理，数据模型绑定等）
+2. DOM事件处理(键盘，鼠标，控制，自定义等事件）
 ---
-<p style="color:#3A9;text-align:center;">数据处理</p>
+<p style="color:#3A9;text-align:center;">简单的数据处理</p>
 ===
 # 纯文本替换
 # HTML节点内容替换
@@ -224,7 +235,7 @@ HTML替换应用于用户数据可能会产生不可预测的结果。
 ```
 
 ---
-<p style="color:#3A9;text-align:center;">指令(Directives)</p>
+<p style="color:#3A9;text-align:center;">模板指令(Directives)</p>
 ===
 ---
 <p style="color:#3A9;text-align:center;">指令</p>
@@ -600,15 +611,15 @@ Vue.config.keyCodes = {
 ### 已经定义的按键修改符
 
 ```
-    .enter
-    .tab
-    .delete (捕获“删除”和“退格”键)
-    .esc
-    .space
-    .up
-    .down
-    .left
-    .right
+.enter
+.tab
+.delete (捕获“删除”和“退格”键)
+.esc
+.space
+.up
+.down
+.left
+.right
 ```
 
 ---
@@ -621,26 +632,20 @@ Vue.config.keyCodes = {
 ### 已经定义的按键修改符
 
 ```
-    .enter
-    .tab
-    .delete (捕获“删除”和“退格”键)
-    .esc
-    .space
-    .up
-    .down
-    .left
-    .right
+.ctrl
+.alt
+.shift
+.meta
 ```
 
 ---
-
 <p style="color:#3A9;text-align:center;">事件指令</p>
 ===
 ### .exact 修改符
 
 `.exact` 修饰符允许你控制由精确的系统修饰符组合触发的事件。
 
-```
+```html
 <!-- 即使 Alt 或 Shift 被一同按下时也会触发 -->
 <button @click.ctrl="onClick">A</button>
 
@@ -652,13 +657,9 @@ Vue.config.keyCodes = {
 ```
 
 ---
-
-
 <p style="color:#3A9;text-align:center;">事件指令</p>
 ===
-
 ### 鼠标事件修改符
-
 ```
 .left
 .right
@@ -666,6 +667,395 @@ Vue.config.keyCodes = {
 ```
 
 适合游戏等控制场景
+
+---
+<p style="color:#3A9;text-align:center;">表单输入与数据模型绑定</p>
+===
+
+---
+<p style="color:#3A9;text-align:center;">针对用户数据输入的`v-model`</p>
+===
+
+1. 格式：`v-model="value"`
+2. 有效的元素: `input`, `textarea` 及 `select`
+
+---
+<p style="color:#3A9;text-align:center;">根据不同的元素影响变化情况</p>
+===
+1. `type=text` 和 `textarea` 元素
+使用 `value` 属性和 `input` 事件；
+2. `type=checkbox` 和 `type=radio`
+使用 `checked` 属性和 `change` 事件；
+3. `select` 元素
+将 `value` 作为 `prop` 并将 `change` 作为事件。
+
+---
+<p style="color:#3A9;text-align:center;">基本用法（文件本）</p>
+===
+1. 文本输入(type=text)
+```html
+<input v-model="message">
+```
+2. 多行文本(textarea)
+```html
+<textarea v-model="message"></textarea>
+```
+
+---
+
+<p style="color:#3A9;text-align:center;">基本用法（选择）</p>
+===
+### 存在性选择(type=checkbox)
+
+```html
+<input type="checkbox" id="checkbox" v-model="checked">
+```
+### 多项选择
+
+a. 单选 (type=radio)
+```html
+  <input type="radio" value="1" v-model="picked">
+  <input type="radio" value="2" v-model="picked">
+```
+b. 多选(type=checkbox)
+ 
+```html
+<input type="checkbox" value="CN" v-model="countries"/>
+<input type="checkbox" value="USA" v-model="countries"/>
+```
+
+---  
+
+<p style="color:#3A9;text-align:center;">基本用法（选择）</p>
+===
+
+
+c. 混合（select)
+
+```html
+<select v-model="selected" [multiple]>
+  <option disabled value="">请选择</option>
+  <option>A</option>
+  <option>B</option>
+  <option>C</option>
+</select>
+```
+
+> 当mutiple属性存在时，相应的model结果就是一个option值的数组，否则是一个option值
+
+---
+
+<p style="color:#3A9;text-align:center;">非默认值绑定</p>
+===
+
+通常模型绑定后会有默认值，比如
+
+```html
+<!-- 当选中时，`picked` 为字符串 "a" -->
+<input type="radio" v-model="picked" value="a">
+
+<!-- `toggle` 为 true 或 false -->
+<input type="checkbox" v-model="toggle">
+
+<!-- 当选中第一个选项时，`selected` 为字符串 "abc" -->
+<select v-model="selected">
+  <option value="abc">ABC</option>
+</select>
+```
+
+---
+
+<p style="color:#3A9;text-align:center;">非默认值绑定</p>
+===
+
+1. 复选框(type="checkbox")的非默认值绑定
+```html
+<input type="checkbox" v-model="toggle"
+       true-value="yes" false-value="no" />
+```
+2. 单选框(type="radio")的非默认值绑定
+```html
+<input type="radio" v-model="pick" v-bind:value="a"/>
+```
+
+---
+
+<p style="color:#3A9;text-align:center;">非默认值绑定</p>
+===
+3. 选择框select的非默认值绑定
+```
+<select v-model="selected">
+    <!-- 内联对象字面量 -->
+  <option v-bind:value="{ number: 123 }">123</option>
+</select>
+
+```
+
+---
+<p style="color:#3A9;text-align:center;">修改符</p>
+===
+1. `.lazy` 不即时同步，会应用`change`事件
+```
+<input v-model.lazy="msg" >
+```
+2. `.number` 将输入转化成数值类型Number
+```
+<input v-model.number="age" type="number">
+```
+3. `.trim` 将首尾多余的空白字符去除
+```
+<input v-model.trim="msg">
+```
+
+---
+
+<p style="color:#3A9;text-align:center;">只作一次修改</p>
+===
+```
+<span v-once>这个将不会改变: {{ msg }}</span>
+```
+---
+
+<p style="color:#3A9;text-align:center;">绑定事件</p>
+===
+### 格式： `v-bind:prop` / `:prop`
+### 作用：绑定属性
+1. 绑定一个或者多个DOM基本的属性(title, src等)
+2. 绑定CSS相关的属性(class, style)
+3. 绑定自定义属性
+
+---
+
+<p style="color:#3A9;text-align:center;">绑定一个或者多个DOM基本的属性</p>
+===
+
+```
+<!-- 绑定一个属性 -->
+<img v-bind:src="imageSrc">
+
+<!-- 动态特性名 (2.6.0+) -->
+<button v-bind:[key]="value"></button>
+
+<!-- 缩写 -->
+<img :src="imageSrc">
+
+<!-- 动态特性名缩写 (2.6.0+) -->
+<button :[key]="value"></button>
+
+<!-- 内联字符串拼接 -->
+<img :src="'/path/to/images/' + fileName">
+
+```
+
+---
+
+<p style="color:#3A9;text-align:center;">绑定CSS相关的属性(class, style)</p>
+===
+```
+<!-- class 绑定 -->
+<div :class="{ red: isRed }"></div>
+<div :class="[classA, classB]"></div>
+<div :class="[classA, { classB: isB, classC: isC }]">
+
+<!-- style 绑定 -->
+<div :style="{ fontSize: size + 'px' }"></div>
+<div :style="[styleObjectA, styleObjectB]"></div>
+```
+
+---
+
+<p style="color:#3A9;text-align:center;">绑定对象到DOM</p>
+===
+```html
+<!-- 绑定一个有属性的对象 -->
+<div v-bind="{ id: someProp, 'other-attr': otherProp }">
+</div>
+```
+
+---
+
+<p style="color:#3A9;text-align:center;">进入组件之前</p>
+===
+
+> 除了v-slot这个跟组件相关的指令，所有模板相关的指令都已经讲完了
+> 在进入组件之前，我们需要了解Vue的实例及相关的基本概念
+
+---
+
+<p style="color:#3A9;text-align:center;">Vue 实例</p>
+===
+
+讲完了
+
+创建：
+
+```js
+var options = {...};
+var vm = new Vue(options);
+```
+`vm => View Model` 表示是一个DOM的模型与视图的处理实例
+`options` 就是创建实例的选项信息，它是Vue实例的核心内容之一。
+
+---
+
+<p style="color:#3A9;text-align:center;">实例的选项：data</p>
+===
+### data
+响应式的数据，当这些数据改变时，实例数据会跟着改变，同时视图会进行重渲染
+
+```js
+// 我们的数据对象
+var data = { a: 1 }
+
+// 该对象被加入到一个 Vue 实例中
+var vm = new Vue({
+  data: data
+});
+vm.a = 2   // data.a => 2
+vm.a == data.a // => true
+
+```
+其中vm就是实例
+
+---
+
+<p style="color:#3A9;text-align:center;">实例的选项：computed</p>
+===
+
+处理需要计算的数据
+
+1. 将复杂的计算迁出模板
+
+初始模板
+
+```
+<div>{{ message.split('').reverse().join('') }}</div>
+```
+
+优化后模板
+
+```
+<div>{{ reversedMessage }}</div>
+```
+
+---
+
+
+<p style="color:#3A9;text-align:center;">实例的选项：computed</p>
+===
+
+```
+{
+  data: { message: 'hello' },
+  computed: {
+    reversedMessage: function () {
+      return this.message.split('').reverse().join('')
+    }
+  }
+}
+```
+
+---
+
+
+<p style="color:#3A9;text-align:center;">实例的选项：computed</p>
+===
+
+# 有时候只是需要获得一个需要计算的值，但是并不需要是响应式的。
+
+模板：
+```
+<div>{{ now }}</div>
+```
+选项:
+
+```
+computed: {
+  now: function () {
+    return Date.now()
+  }
+}
+
+```
+
+---
+
+<p style="color:#3A9;text-align:center;">实例的选项：computed</p>
+===
+
+### setter
+
+计算属性默认函数是getter，也就是只获取的数值，不改变数据。
+但是computed支持修改。
+方式是
+
+```js
+data: {
+  time: 0,
+}, 
+computed: {
+  now: {
+    get: function () {
+      return Date.now()
+    },
+    set: function(time) {
+      this.time = time; 
+    }
+  }
+}
+```
+
+
+---
+
+
+<p style="color:#3A9;text-align:center;">实例的选项：watch</p>
+===
+侦听数据的变化，但是简单的计算通常推荐computed.
+
+```
+<div id="watch">{{ fullName }}</div>
+```
+
+```
+  data: {
+    firstName: 'Foo',
+    lastName: 'Bar',
+    fullName: 'Foo Bar'
+  },
+  watch: {
+    firstName: function (val) {
+      this.fullName = val + ' ' + this.lastName
+    },
+    lastName: function (val) {
+      this.fullName = this.firstName + ' ' + val
+    }
+```
+
+---
+<p style="color:#3A9;text-align:center;">实例的选项：watch</p>
+===
+
+computed 版本实现
+
+```js
+  data: {
+    firstName: 'Foo',
+    lastName: 'Bar',
+  },
+  computed: {
+    fullName: function () {
+      return this.firstName + ' ' + this.lastName
+    }
+  }
+```
+
+> 对于简单的计算，computed 更加简洁
+> 但是对于复杂的数据，比如异步数据的更新的监控，watch会更加好用
+
+---
+
+
 
 
 

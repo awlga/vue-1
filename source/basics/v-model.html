@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+
+  <div class="on1">
+    <h1>on1（表达式）</h1>
+    <button v-on:click="counter += 1">点击加1
+    </button>
+    <p>{{ counter }}</p>
+  </div>
+</body>
+
+<script>
+  var on1 = new Vue({
+    el: '.on1',
+    data: {
+      counter: 0
+    }
+  });
+</script>
+
+</html>
