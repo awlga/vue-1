@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+
+  <div class="ref1" @click="onClick()">
+    <p>ref放在父组件</p>
+    <base-input ref="usernameInput"></base-input>
+  </div>
+
+  <div class="ref2" @click="onClick()">
+    <p>ref同时放在父子组件</p>
+    <ref-input ref="usernameInput"></ref-input>
+  </div>
+
+</body>
+
+<script>
+  Vue.component('base-input', {
+    template: '<input/>',
+  });
+
+  Vue.component('ref-input', {
+    template: '<input ref="input">',
+    methods: {
+      focus: function () {
+        this.$refs.input.focus()
+      }
+    }
+  });
+
+  let ref1 = new Vue({
+    el: '.ref1',
+    methods: {
+      onClick: function () {
+        console.log(this.$refs.usernameInput);
+      }
+    }
+  });
+
+  let ref2 = new Vue({
+    el: '.ref2',
+    methods: {
+      onClick: function () {
+        console.log(this.$refs.usernameInput.focus());
+      }
+    }
+  });
+</script>
+
+</html>
