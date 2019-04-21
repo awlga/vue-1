@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+
+  <div class="model">
+    <i-input v-model="model" value="1"></i-input>
+    <i-input v-model="model" value="2"></i-input>
+    <i-input v-model="model" value="3"></i-input>
+  </div>
+
+</body>
+
+<script>
+  Vue.component('i-input', {
+    model: {
+      prop: 'model',
+      event: 'change'
+    },
+    props: {
+      value: String,
+      model: String
+    },
+    computed: {
+      checked() {
+        return this.model == this.value
+      }
+    },
+    template: `
+    <input type="radio"
+      v-bind:checked="checked"
+      :value="value"
+      @change="$emit('change', $event.target.value)"
+    >
+  `
+  });
+
+  let app = new Vue({
+    el: '.model', data: {
+      model: "1",
+      value: "1"
+    }
+  });
+</script>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+
+  <div class="lines">
+    <lines v-for="content in contents" v-bind:content="content" v-on:content="onClick();"></lines>
+  </div>
+
+</body>
+
+<script>
+  Vue.component('lines', {
+    props: ['content'],
+    template: "<div><div v-on:click=\"$emit('content')\">{{ content }}</div></div>",
+  });
+
+  let lines = new Vue({
+    el: '.lines',
+    data: {
+      contents: ["Hello Vue 1!", "Hello Vue 2!", "Hello Vue 3!", "Hello Vue 4!"]
+    },
+    methods: {
+      onClick: function () {
+        console.log(arguments);
+        console.log("clicked");
+      }
+    }
+  });
+</script>
+
+</html>

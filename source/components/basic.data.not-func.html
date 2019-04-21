@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+
+  <div class="counter">
+    <click-counter></click-counter>
+    <click-counter></click-counter>
+    <click-counter></click-counter>
+  </div>
+
+</body>
+
+<script>
+  let data = {
+    count: 0
+  };
+  Vue.component('click-counter', {
+    data: function () {
+      return data;
+    },
+    template: '<p><button v-on:click="count++">点击了{{ count }}次.</button></p>'
+  });
+
+  let counter = new Vue({ el: '.counter' });
+</script>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+
+  <div class="lines">
+    <div v-on:content-click="onClick('out');" v-on:click="onParentClick">parent click event.</div>
+    <lines v-for="content in contents" v-bind:content="content" v-on:content-click="onClick('inner');"></lines>
+  </div>
+
+</body>
+
+<script>
+  Vue.component('lines', {
+    props: ['content'],
+    template: "<div><div v-on:click=\"$emit('content-click')\">{{ content }}</div><div v-on:p-click=\"onParent()\"></div></div>",
+    methods: {
+      onParent: function () {
+        console.log("on Parent");
+      }
+    }
+  });
+
+  let lines = new Vue({
+    el: '.lines',
+    data: {
+      contents: ["Hello Vue 1!", "Hello Vue 2!", "Hello Vue 3!", "Hello Vue 4!"]
+    },
+    methods: {
+      onClick: function () {
+        console.log(arguments);
+        console.log("clicked");
+      },
+      onParentClick: function () {
+        console.log("parent clicked");
+        this.$emit('p-click');
+      }
+    }
+  });
+</script>
+
+</html>

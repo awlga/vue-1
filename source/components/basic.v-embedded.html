@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+
+  <div class="model">
+    <embeded-tag>aaaa</embeded-tag>
+    <embeded-tag>bbb</embeded-tag>
+    <embeded-tag>ccc</embeded-tag>
+  </div>
+
+</body>
+
+<script>
+  Vue.component('embeded-tag', {
+    template: `
+    <div class="embeded-tag">
+      <h1>This is embedded!</h1>
+      <slot></slot>
+    </div>
+  `
+  })
+
+  let app = new Vue({
+    el: '.model'
+  });
+</script>
+
+</html>

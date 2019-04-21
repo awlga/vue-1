@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+
+  <div class="model">
+    <i-input v-model="model"></i-input>
+  </div>
+
+</body>
+
+<script>
+  Vue.component('i-input', {
+    props: ['value'],
+    template: `
+    <textarea
+      v-bind:value="value"
+      v-on:input="$emit('input', $event.target.value)"
+    ></textarea>
+  `
+  });
+
+  let app = new Vue({
+    el: '.model', data: {
+      model: 1
+    }
+  });
+</script>
+
+</html>

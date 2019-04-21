@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+
+  <div class="component">
+
+    <button v-for="i in 3" v-on:click="currentIdx = i">{{ i }}</button>
+
+    <component v-bind:is="current"></component>
+
+  </div>
+
+</body>
+
+<script>
+  Vue.component('com-1', {
+    template: '<div>Component 1</div>'
+  });
+  Vue.component('com-2', {
+    template: '<div>Component 2</div>'
+  });
+  Vue.component('com-3', {
+    template: '<div>Component 3</div>'
+  });
+
+
+  // let component = new Vue({ el: '.component', data: { currentIdx: 1, } });
+
+  new Vue({
+    el: '.component',
+    data: {
+      currentIdx: 1,
+    },
+    computed: {
+      current: function () {
+        return 'com-' + this.currentIdx
+      }
+    }
+  });
+</script>
+
+</html>

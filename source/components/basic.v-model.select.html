@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+
+  <div class="model">
+    <i-input v-model="model"></i-input>
+  </div>
+
+</body>
+
+<script>
+  Vue.component('i-input', {
+    props: {
+      value: String
+    },
+    template: `
+    <select
+      v-bind:value="value"
+      @input="$emit('input', $event.target.value)"
+    ><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+  `
+  });
+
+  let app = new Vue({
+    el: '.model', data: {
+      model: "111"
+    }
+  });
+</script>
+
+</html>
