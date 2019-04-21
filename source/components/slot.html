@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+
+  <div class="slot">
+      <links v-bind:url="http"></links>
+      <links url="https://www.google.com">Google {{url}}</links>
+      <links url="https://www.bing.com">Bing {{http}}</links>
+  </div>
+
+</body>
+
+<script>
+  Vue.component('links', {
+    // 在 JavaScript 中是 camelCase 的
+    props: ['url'],
+    template: `
+  <p>
+    <a v-bind:href="url" class="nav-link" >
+      <slot>{{url}}</slot>
+    </a>
+  </p>
+    `
+  })
+
+  let props = new Vue({ el: '.slot' , data: {
+    http: "https://www.baidu.com"
+  }});
+</script>
+
+</html>
