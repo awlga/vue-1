@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+
+  <div class="programmed-events" v-on:click="$emit('myevent');">
+    程序定义事件处理，请点击观察console
+  </div>
+
+</body>
+
+<script>
+
+  let props = new Vue({
+    el: '.programmed-events',
+    created: function () {
+      console.log("inside created");
+      this.$on("myevent", function () {
+        console.log("myevent occurred");
+      });
+    }
+  });
+</script>
+
+</html>

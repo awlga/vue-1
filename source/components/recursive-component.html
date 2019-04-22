@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+  <style>
+    .recursive {
+      border: 1px solid #F00;
+      margin: 10px 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="recursive-component">
+    {{content}}
+    <recursive-component :content=content></recursive-component>
+  </div>
+
+</body>
+
+<script>
+  let name = "recursive-component";
+  let template = `<p class="recursive">
+      {{content.message}}
+  <` + name
+      + ` v-if="content.content" :content="content.content" ></`
+      + name + `></p>
+`;
+  let options = {
+    name,
+    props: ['content'],
+    template
+  };
+
+  Vue.component(options.name, options);
+
+  let props = new Vue({
+    el: '.recursive-component', 
+    data: {
+      content: {
+        message: "hello 1",
+        content: {
+          message: "hello 2",
+          content: {
+            message: "hello 3",
+          }
+        }
+      }
+    }
+  });
+</script>
+
+</html>

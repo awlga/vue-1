@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+
+  <div class="dependent-injection">
+    <base-input></base-input>
+  </div>
+
+</body>
+
+<script>
+  Vue.component('base-input', {
+    template: '<input value=""/>',
+    inject: ['message'],
+    // data: function () {
+    //   return {
+    //     message: "hello"
+    //   };
+    // },
+    created: function () {
+      console.log("created");
+      console.log(this.message);
+    }
+
+  });
+
+  Vue.component('ref-input', {
+    template: '<input ref="input">',
+    methods: {
+      focus: function () {
+        this.$refs.input.focus()
+      }
+    }
+  });
+
+  let ref1 = new Vue({
+    el: '.dependent-injection',
+    data: {
+      message: "hello from parent"
+    },
+    provide: function () {
+      return {
+        message: this.message
+      }
+
+    }
+  });
+
+</script>
+
+</html>
