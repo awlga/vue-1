@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+  <script src="../vue-router.js">
+  </script>
+</head>
+
+<body>
+
+  <div id="app">
+    <h1>Router Basics</h1>
+    <router-link to="/router1">Go to router1</router-link>
+    <router-link to="/router2">Go to router2</router-link>
+    <router-view></router-view>
+  </div>
+</body>
+
+<script>
+  const com1 = { template: '<div>com1</div>' }
+  const com2 = { template: '<div>com2</div>' }
+  const routes = [
+    { path: '/router1', component: com1 },
+    { path: '/router2', component: com2 }
+  ]
+
+  const router = new VueRouter({
+    routes
+  });
+
+  const app = new Vue({
+    router
+  }).$mount('#app')
+
+</script>
+
+</html>
