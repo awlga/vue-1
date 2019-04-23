@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+  <script src="../vue-router.js">
+  </script>
+</head>
+
+<body>
+
+  <div id="app">
+    <h1>Named Views</h1>
+    <ul>
+      <li>
+        <router-link to="/">/</router-link>
+      </li>
+      <li>
+        <router-link to="/other">/other</router-link>
+      </li>
+    </ul>
+    <router-view class="view one"></router-view>
+    <router-view class="view two" name="v1"></router-view>
+    <router-view class="view three" name="v2"></router-view>
+  </div>
+</body>
+
+<script>
+
+  const Com1 = { template: '<div>Com1</div>' }
+  const Com2 = { template: '<div>Com2</div>' }
+  const Com3 = { template: '<div>Com3</div>' }
+
+  const routes = [
+    {
+      path: '/',
+      components: {
+        default: Com1,
+        v1: Com2,
+        v2: Com3
+      }
+    },
+    {
+      path: '/other',
+      components: {
+        default: Com3,
+        v1: Com1,
+        v2: Com3
+      }
+    },
+  ];
+
+  const router = new VueRouter({
+    routes
+  });
+
+  const app = new Vue({
+    router
+  }).$mount('#app');
+
+</script>
+
+</html>

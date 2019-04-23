@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+  <script src="../vue-router.js">
+  </script>
+</head>
+
+<body>
+
+  <div id="app">
+    <h1>Router Basics</h1>
+    <p>
+      <router-link to="/user/1">/user/foo</router-link>
+      <router-link to="/user/1000/profile">/user/foo/profile</router-link>
+      <router-link to="/user/200/posts">/user/foo/posts</router-link>
+    </p>
+    <router-view></router-view>
+  </div>
+</body>
+
+<script>
+
+  const User = {
+    template: `
+    <div class="user">
+      <h2>User Id: {{ $route.params.id }}</h2>
+      <router-view></router-view>
+    </div>
+  `,
+    mounted: function () {
+      console.log("inside mounted");
+      console.log(this.router);
+    }
+  }
+  const UserHome = { template: '<div>Home</div>' }
+  const UserProfile = { template: '<div>Profile</div>' }
+  const UserPosts = { template: '<div>Posts</div>' }
+
+  const routes = [
+    {
+      path: '/user/:id', component: User,
+      children: [
+        { path: 'home', component: UserHome, alias: '' },
+        { path: 'profile', component: UserProfile },
+        { path: 'posts', component: UserPosts }
+      ],
+      redirect: '/user/:id/home'
+    }
+  ];
+
+  const router = new VueRouter({
+    routes
+  });
+
+  const app = new Vue({
+    router
+  }).$mount('#app');
+
+  setInterval(() => {
+    // console.log(app.$router.push);
+    if (app.$router) {
+      app.$router.push("/user/" + new Date().getTime() + "/profile");
+    }
+  }, 1000);
+
+  setInterval(() => {
+    // console.log(app.$router.push);
+    if (app.$router) {
+      let uid = '1010';
+      app.$router.push(`/user/${uid}/profile`);
+    }
+  }, 3000);
+
+  setInterval(() => {
+    // console.log(app.$router.push);
+    if (app.$router) {
+      let uid = 'query';
+      app.$router.push({ path: `/user/${uid}/profile`, query: { from: 'private' }});
+    }
+  }, 6000);
+
+  setInterval(() => {
+    // console.log(app.$router.push);
+    if (app.$router) {
+      let uid = 'replacedID';
+      app.$router.push(`/user/${uid}/profile`);
+    }
+  }, 9000);
+
+
+</script>
+
+</html>

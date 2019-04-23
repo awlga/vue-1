@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+  <script src="../vue-router.js">
+  </script>
+</head>
+
+<body>
+
+  <div id="app">
+    <h1>Router Basics</h1>
+    <router-link to="/user/Eric">Eirc</router-link>
+    <router-link to="/user/Paul">Paul</router-link>
+    <router-link to="/user/John">John</router-link>
+    <router-view></router-view>
+  </div>
+</body>
+
+<script>
+  const user = {
+    template: '<div>id: {{$route.params.name}}</div>',
+    watch: {
+      '$route'(to, from) {
+        console.log("from :" + from.path);
+        console.log("to :" + to.path);
+      }
+    }
+  };
+  const routes = [
+    { path: '/user/:name', component: user }
+  ];
+
+  const router = new VueRouter({
+    routes
+  });
+
+  const app = new Vue({
+    router
+  }).$mount('#app')
+
+</script>
+
+</html>

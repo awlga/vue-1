@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+  <script src="../vue-router.js">
+  </script>
+</head>
+
+<body>
+
+  <div id="app">
+    <h1>Router Basics</h1>
+    <p>
+      <router-link :to="{ name: 'user', params: { id: 'router-link' }}">
+        User
+      </router-link>
+    </p>
+    <router-view></router-view>
+  </div>
+</body>
+
+<script>
+
+  const User = {
+    template: `
+    <div class="user">
+      <h2>User Id: {{ $route.params.id }}</h2>
+    </div>
+  `
+  }
+  const routes = [
+    {
+      path: '/user/:id', component: User,
+      name: 'user',
+    }
+  ];
+
+  const router = new VueRouter({
+    routes
+  });
+
+  const app = new Vue({
+    router
+  }).$mount('#app')
+
+  setInterval(() => {
+    // console.log(app.$router.push);
+    if (app.$router) {
+      app.$router.push({ name: 'user', params: { id: 'push' } });
+    }
+  }, 2000);
+
+</script>
+
+</html>
