@@ -24,29 +24,50 @@
 <script>
 
   const User = {
+    props: ['id'],
     template: `
     <div class="user">
-      <h2>User Id: {{ $route.params.id }}</h2>
+      <h2>User Id: {{ id }}</h2>
       <router-view></router-view>
     </div>
   `
   }
   const UserHome = {
-    template: '<div>Home</div>',
+    data: function() {
+      return {
+        name: "Home"
+      }
+    },
+    mounted: function() {
+      console.log("mounted: ");
+      console.log(this.name);
+      console.log(this.$route.params);
+      setTimeout(() => {
+        this.name = "Mounted!"
+      }, 2000);
+    },
+    template: '<div>{{name}}</div>',
     beforeRouteEnter: function (to, from, next) {
       console.log("from: " + from.path + "to: " + to.path);
       console.log("inside route enter");
-      next();
+      next((vm) => {
+        console.log(vm);
+        console.log(vm.name = "Changed!");
+      });
     },
 
     beforeRouteUpdate: function (to, from, next) {
       console.log("from: " + from.path + "to: " + to.path);
       console.log("inside before route update");
+      console.log(this.$router);
+
       next();
     },
     beforeRouteLeave: function (to, from, next) {
       console.log("from: " + from.path + "to: " + to.path);
       console.log("inside before route leave");
+      console.log(this.$router);
+
       next();
     }
 
@@ -102,6 +123,7 @@
       beforeEnter: function (to, from, next) {
         console.log("from: " + from.path + "to: " + to.path);
         console.log("inside before enter");
+        console.log("inside user");
         next();
       },
       watch: {
