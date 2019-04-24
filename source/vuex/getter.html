@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+  <script src="../vuex.js">
+  </script>
+</head>
+
+<body>
+
+  <div id="app">
+    <h1>{{count}}</h1>
+    <h1>{{length}}</h1>
+    <h1>{{lg3}}</h1>
+    <h1>{{lg3Len}}</h1>
+    <p>
+      <button @click="increment">+</button>
+      <button @click="decrement">-</button>
+      <button @click="change">$</button>
+    </p>
+  </div>
+</body>
+
+<script>
+
+  const store = new Vuex.Store({
+    state: {
+      count: 0,
+      items: [
+        { id: 1, name: "A1" },
+        { id: 2, name: "A2" },
+        { id: 3, name: "A3" },
+        { id: 4, name: "A4" },
+        { id: 5, name: "A5" },
+      ]
+    },
+    mutations: {
+      increment: state => state.count++,
+      decrement: state => state.count--
+    },
+    getters: {
+      length: function (state) {
+        return state.items.length
+      },
+      lg3: function (state) {
+        return state.items.filter((item) => item.id > 3);
+      },
+      lg3Len: function (state, getters) {
+        return getters.lg3.length;
+      },
+      getNameById: (state) => (id) => {
+        const found = state.items.filter((item) => item.id === id);
+        if (found.length) {
+          return found[0].name;
+        }
+        return "Not Found!"
+      }
+    }
+  })
+
+  const app = new Vue({
+    store,
+    computed: Object.assign(Vuex.mapState([
+      'count'
+    ]), Vuex.mapGetters(['length', 'lg3', 'lg3Len'])),
+    methods: {
+      increment() {
+        this.$store.commit('increment')
+        console.log(this.$store.getters.getNameById(this.$store.state.count));
+
+      },
+      decrement() {
+        this.$store.commit('decrement')
+        console.log(this.$store.getters.getNameById(this.$store.state.count));
+
+      },
+      change() {
+        this.$store.state.count = 100;
+        console.log(this.$store.getters.getNameById(this.$store.state.count));
+
+      }
+    }
+  }).$mount('#app')
+
+</script>
+
+</html>

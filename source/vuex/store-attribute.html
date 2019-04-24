@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+  <script src="../vuex.js">
+  </script>
+</head>
+
+<body>
+
+  <div id="app">
+      <h1>{{count}}</h1>
+      <p>
+      <button @click="increment">+</button>
+      <button @click="decrement">-</button>
+      <button @click="change">$</button>
+    </p>
+    <h1>Comp COunt</h1>
+    <counter></counter>
+  </div>
+</body>
+
+<script>
+  Vue.component('counter', {
+    template: '<p>{{ count }}</p>',
+    computed: {
+      count() {
+        return this.$store.state.count;
+      }
+    }
+  });
+
+  const store = new Vuex.Store({
+    state: {
+      count: 0
+    },
+    mutations: {
+      increment: state => state.count++,
+      decrement: state => state.count--
+    }
+  })
+
+  const app = new Vue({
+    store,
+    computed: {
+      count() {
+        return this.$store.state.count
+      }
+    },
+    methods: {
+      increment() {
+        this.$store.commit('increment')
+      },
+      decrement() {
+        this.$store.commit('decrement')
+      },
+      change() {
+        this.$store.state.count = 100;
+      }
+    }
+  }).$mount('#app')
+
+</script>
+
+</html>

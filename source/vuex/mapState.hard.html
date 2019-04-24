@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+  <script src="../vuex.js">
+  </script>
+</head>
+
+<body>
+
+  <div id="app">
+      <h1>{{count}}</h1>
+      <h1>{{dec}}</h1>
+      <h1>{{inc}}</h1>
+      <h1>{{incr}}</h1>
+      <h1>{{getThis}}</h1>
+      <p>
+      <button @click="increment">+</button>
+      <button @click="decrement">-</button>
+      <button @click="change">$</button>
+    </p>
+  </div>
+</body>
+
+<script>
+
+  const store = new Vuex.Store({
+    state: {
+      count: 0,
+      value: "hello"
+    },
+    mutations: {
+      increment: state => state.count++,
+      decrement: state => state.count--
+    }
+  })
+
+  const app = new Vue({
+    store,
+    computed: Vuex.mapState({
+      count: state => state.count,
+      dec: state => state.count - 1,
+      inc: state => state.count + 1,
+      incr: 'value',  // 这里的count必须是state里的属性,
+      getThis: function() {
+        console.log(this.$data);
+        return "get This is ok";
+      }
+    }),
+    methods: {
+      increment() {
+        this.$store.commit('increment')
+      },
+      decrement() {
+        this.$store.commit('decrement')
+      },
+      change() {
+        this.$store.state.count = 100;
+      }
+    }
+  }).$mount('#app')
+
+</script>
+
+</html>
