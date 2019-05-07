@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+  <script src="../vuex.js">
+  </script>
+</head>
+
+<body>
+  <div>
+    {{ message | capitalize}}
+  </div>
+  <div id="bind" :message="message | capitalize">
+  </div>
+</body>
+
+<script>
+
+  var vm = new Vue({
+    el: "div",
+    data: {
+      message: "hello"
+    },
+
+    filters: {
+      capitalize: function (value) {
+        if (!value) return ''
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1)
+      }
+    }
+  })
+
+  var vm1 = new Vue({
+    el: "#bind",
+    data: {
+      message: "hello"
+    },
+
+    filters: {
+      capitalize: function (value) {
+        if (!value) return ''
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1)
+      }
+    }
+  })
+
+</script>
+
+</html>

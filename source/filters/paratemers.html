@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+  <script src="../vuex.js">
+  </script>
+</head>
+
+<body>
+  <div>
+    {{ message | capitalize("world", extra)}}
+  </div>
+</body>
+
+<script>
+  var vm = new Vue({
+    el: "div",
+    data: {
+      extra: "extra",
+      message: "hello"
+    },
+
+    filters: {
+      capitalize: function (value, a, b) {
+        console.log(value, a, b);
+        value = [value, a, b].join(' ');
+        if (!value) return ''
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1)
+      }
+    }
+  });
+</script>
+
+</html>
