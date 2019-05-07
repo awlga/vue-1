@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+  <script src="../vuex.js">
+  </script>
+</head>
+
+<body>
+</body>
+
+<script>
+var mixin = {
+  data: function () {
+    return {
+      message: 'hello',
+      foo: 'abc'
+    }
+  }
+};
+new Vue({
+  mixins: [mixin],
+  data: function () {
+    return {
+      message: 'goodbye',
+      bar: 'def'
+    }
+  },
+  created: function () {
+    console.log(this.$data.message);
+    console.log(this.$data.bar);
+    console.log(this.$data.foo);
+  }
+});
+
+</script>
+
+</html>

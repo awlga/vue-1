@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+  <script src="../vuex.js">
+  </script>
+</head>
+
+<body>
+</body>
+
+<script>
+
+  var myMixin = {
+    created: function () {
+      this.hello()
+    },
+    methods: {
+      hello: function () {
+        console.log('hello from mixin!')
+      }
+    }
+  }
+
+  var Component = Vue.extend({
+    mixins: [myMixin]
+  })
+
+  var component = new Component() // => "hello from mixin!"
+
+</script>
+
+</html>

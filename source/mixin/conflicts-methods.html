@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+  <script src="../vuex.js">
+  </script>
+</head>
+
+<body>
+</body>
+
+<script>
+
+var mixin = {
+  move: function() {
+    console.log('moved mixin')
+  }
+}
+
+new Vue({
+  mixins: [mixin],
+  move: function() {
+    console.log('moved com')
+  },
+  created: function () {
+    console.log('组件钩子被调用')
+    this.$options.move();
+  }
+});
+
+</script>
+
+</html>
