@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+  <div id="app">
+    <hx :x="1">
+      <a>Hello World!</a>
+    </hx>
+    <hx :x="2">
+      <a>Hello World!</a>
+    </hx>
+    <hx :x="3">
+      <a>Hello World!</a>
+    </hx>
+    <hx :x="4">
+      <a>Hello World!</a>
+    </hx>
+    <hx :x="5">
+      <a>Hello World!</a>
+    </hx>
+    <hx :x="6">
+      <a>Hello World!</a>
+    </hx>
+    <hx :x="7">
+      <a>Hello World!</a>
+    </hx>
+
+  </div>
+</body>
+
+<script>
+
+  Vue.component('hx', {
+    render: function (createElement) {
+      return createElement(
+        'h' + this.x,   // 标签名称
+        this.$slots.default // 子节点数组
+      )
+    },
+    props: {
+      x: {
+        type: Number,
+        required: true
+      }
+    }
+  });
+
+  let vm = new Vue({
+    el: "#app"
+  });
+
+
+</script>
+
+</html>

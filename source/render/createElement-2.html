@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+  <div id="app">
+    <ce1>
+      <a>Hello World!</a>
+    </ce1>
+    <ce2>
+      <a>Hello World!</a>
+    </ce2>
+    <ce3>
+      <a>Hello World!</a>
+    </ce3>
+    <ce4>
+      <a>Hello World!</a>
+    </ce4>
+  </div>
+</body>
+
+<script>
+  // 最简单的方式
+  Vue.component('ce1', {
+    render: function (createElement) {
+      return createElement(
+        'p',
+        "Hello ce1"
+      )
+    }
+  });
+
+  // 添加元素/组件属性
+  Vue.component('ce2', {
+    render: function (createElement) {
+      return createElement(
+        'p',
+        {
+          class: {
+            foo: true,
+            bar: false
+          },
+          style: {
+            color: 'red',
+            fontSize: '32px'
+          },
+          attrs: {
+            value: 'ce2'
+          },
+          domProps: {
+            innerHTML: '基于HTML属性修改'
+          },
+          // 经过测试无效
+          nativeOn: {
+            click: function () {
+              console.log("inside clicked");
+              // this.innerHTML = "clicked!"
+            }
+          },
+        }
+      )
+    }
+  });
+
+  Vue.component('ce3', {
+    render: function (createElement) {
+      return createElement(
+        'p',
+        {
+          props: {
+            name: 'bar'
+          },
+          domProps: {
+            innerHTML: '基于组件的属性修改'
+          },
+          on: {
+            click: function (e) {
+              console.log("clicked !");
+              console.log(e.target);
+            }
+          },
+        }
+      )
+    }
+  });
+
+  let vm = new Vue({
+    el: "#app"
+  });
+
+
+</script>
+
+</html>

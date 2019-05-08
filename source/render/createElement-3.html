@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+  <div id="app">
+    <ce1>
+      <a>Hello World!</a>
+    </ce1>
+    <ce2>
+      <a>Hello World!</a>
+    </ce2>
+  </div>
+</body>
+
+<script>
+
+  Vue.component('ce1', {
+    render: function (createElement) {
+      return createElement(
+        'p',
+        {
+          style: {
+            border: "1px solid red",
+            padding: "5px"
+          }
+        },
+        ["ce1"]
+      )
+    }
+  });
+
+  Vue.component('ce2', {
+    render: function (createElement) {
+      return createElement(
+        'div',
+        {
+          style: {
+            border: "1px solid green",
+            padding: "5px"
+          }
+        },
+        ["ce2", createElement('ce1'),
+        ]
+      )
+    }
+  });
+
+  let vm = new Vue({
+    el: "#app"
+  });
+
+
+</script>
+
+</html>

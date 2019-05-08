@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+  <div id="app">
+    <hx :x="1">
+      <a>Hello World!</a>
+    </hx>
+    <hx :x="2">
+      <a>Hello World!</a>
+    </hx>
+    <hx :x="3">
+      <a>Hello World!</a>
+    </hx>
+    <hx :x="4">
+      <a>Hello World!</a>
+    </hx>
+    <hx :x="5">
+      <a>Hello World!</a>
+    </hx>
+    <hx :x="6">
+      <a>Hello World!</a>
+    </hx>
+    <hx :x="7">
+      <a>Hello World!</a>
+    </hx>
+
+  </div>
+</body>
+<script type="text/x-template" id="hx-template">
+  <h1 v-if="x === 1">
+    <slot></slot>
+  </h1>
+  <h2 v-else-if="x === 2">
+    <slot></slot>
+  </h2>
+  <h3 v-else-if="x === 3">
+    <slot></slot>
+  </h3>
+  <h4 v-else-if="x === 4">
+    <slot></slot>
+  </h4>
+  <h5 v-else-if="x === 5">
+    <slot></slot>
+  </h5>
+  <h6 v-else-if="x === 6">
+    <slot></slot>
+  </h6>
+</script>
+
+<script>
+
+  Vue.component('hx', {
+    template: '#hx-template',
+    props: {
+      x: {
+        type: Number,
+        required: true
+      }
+    }
+  });
+
+  let vm = new Vue({
+    el: "#app"
+  });
+
+
+</script>
+
+</html>
