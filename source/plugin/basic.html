@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+  <div id="app">
+    Hello Plugin
+    <p v-green>Green Paragraph!</p>
+  </div>
+</body>
+
+<script>
+
+  var MyPlugin = {};
+  MyPlugin.install = function (Vue, options) {
+    Vue.directive('green', function (el) {
+      el.style.backgroundColor = "green";
+    });
+    Vue.mixin({
+      created: function () {
+        console.log('inside My Plugin');
+      }
+    });
+  };
+
+  Vue.use(MyPlugin);
+
+  var vm = new Vue({
+    el: "#app"
+  });
+
+</script>
+
+</html>
