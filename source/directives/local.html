@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+
+  <div id="app">
+
+    <input>
+    <input v-focus>
+
+  </div>
+
+</body>
+
+<script>
+
+  let vm = new Vue({
+    el: "#app",
+    directives: {
+      focus: {
+        inserted: function (el) {
+          el.focus()
+        }
+      }
+    }
+  });
+
+</script>
+
+</html>

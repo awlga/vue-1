@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="../vue.js">
+  </script>
+</head>
+
+<body>
+
+  <div id="app">
+    <p v-greenizer>Hello Green World</p>
+    <p v-color="{color: 'red'}">Hello Color World</p>
+    <p v-value="'hello'">Hello Value World</p>
+  </div>
+
+</body>
+
+<script>
+
+  Vue.directive('greenizer', function (el) {
+    el.style.backgroundColor = "green";
+  });
+
+  Vue.directive('color', function (el, binding) {
+    el.style.backgroundColor = binding.value.color
+  });
+
+
+  Vue.directive('value', function (el, binding) {
+    console.log(binding.value);
+  });
+
+  let vm = new Vue({
+    el: "#app"
+  });
+
+</script>
+
+</html>
